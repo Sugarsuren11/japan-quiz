@@ -1,63 +1,44 @@
-const questions = [
-    {
-        hiragana: "わたし",
-        romaji: "watashi",
-        meaning: "I",
-        options: ["watashi", "anata", "sensei", "gakusei"],
-        correct: 0
-    },
-    {
-        hiragana: "あなた",
-        romaji: "anata",
-        meaning: "You",
-        options: ["watashi", "anata", "sensei", "gakusei"],
-        correct: 1
-    },
-    {
-        hiragana: "せんせい",
-        romaji: "sensei",
-        meaning: "Teacher",
-        options: ["watashi", "anata", "sensei", "gakusei"],
-        correct: 2
-    }
-];
-
-let currentQuestionIndex = 0;
-let score = 0;
-
-function loadQuestion() {
-    const question = questions[currentQuestionIndex];
-    document.querySelector('.question').textContent = question.hiragana;
-
-    const options = document.querySelectorAll('.option');
-    options.forEach((btn, index) => {
-        btn.textContent = question.options[index];
-    });
+body {
+  font-family: sans-serif;
+  text-align: center;
+  background: #f9f9f9;
+  padding: 40px;
 }
 
-function checkAnswer(selectedIndex) {
-    const question = questions[currentQuestionIndex];
-    if (selectedIndex === question.correct) {
-        score++;
-    }
-
-    document.getElementById('score').textContent = `Score: ${score}`;
-    document.getElementById('next-button').style.display = "block";
+.card {
+  display: inline-block;
+  background: white;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  margin-bottom: 20px;
 }
 
-function nextQuestion() {
-    currentQuestionIndex++;
-    if (currentQuestionIndex >= questions.length) {
-        alert(`Game Over! Your final score is ${score}`);
-        currentQuestionIndex = 0;
-        score = 0;
-        document.getElementById('score').textContent = `Score: ${score}`;
-    }
-    loadQuestion();
-    document.getElementById('next-button').style.display = "none";
+.choices {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  max-width: 400px;
+  margin: auto;
 }
 
-window.onload = () => {
-    loadQuestion();
-    document.getElementById('next-button').style.display = "none";
-};
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  background: #e0e0e0;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #d5d5d5;
+}
+
+.correct {
+  background-color: #a5d6a7 !important;
+}
+
+.wrong {
+  background-color: #ef9a9a !important;
+}
